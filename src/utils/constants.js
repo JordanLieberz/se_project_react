@@ -10,6 +10,26 @@ export const weatherOptions = [
     url: new URL("../assets/day/cloudy.png", import.meta.url).href,
   },
   {
+    day: true,
+    condition: "rainy",
+    url: new URL("../assets/day/rainy.png", import.meta.url).href,
+  },
+  {
+    day: true,
+    condition: "stormy",
+    url: new URL("../assets/day/storm.png", import.meta.url).href,
+  },
+  {
+    day: true,
+    condition: "snowy",
+    url: new URL("../assets/day/snowy.png", import.meta.url).href,
+  },
+  {
+    day: true,
+    condition: "foggy",
+    url: new URL("../assets/day/foggy.png", import.meta.url).href,
+  },
+  {
     day: false,
     condition: "clear",
     url: new URL("../assets/night/clear.png", import.meta.url).href,
@@ -18,6 +38,26 @@ export const weatherOptions = [
     day: false,
     condition: "cloudy",
     url: new URL("../assets/night/cloudy.png", import.meta.url).href,
+  },
+  {
+    day: false,
+    condition: "rainy",
+    url: new URL("../assets/night/rainy.png", import.meta.url).href,
+  },
+  {
+    day: false,
+    condition: "stormy",
+    url: new URL("../assets/night/storm.png", import.meta.url).href,
+  },
+  {
+    day: false,
+    condition: "snowy",
+    url: new URL("../assets/night/snowy.png", import.meta.url).href,
+  },
+  {
+    day: false,
+    condition: "foggy",
+    url: new URL("../assets/night/foggy.png", import.meta.url).href,
   },
 ];
 
