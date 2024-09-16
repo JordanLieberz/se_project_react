@@ -2,11 +2,11 @@ import "./Footer.css";
 
 function Footer() {
   return (
-    <div className="footer">
-      <h2 className="footer__developer">
+    <footer className="footer">
+      <p className="footer__developer">
         Developed by Jordan Lieberz <span>2024</span>
-      </h2>
-    </div>
+      </p>
+    </footer>
   );
 }
 export default Footer;
