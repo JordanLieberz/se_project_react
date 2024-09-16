@@ -65,6 +65,9 @@
 .modal__caption {
   margin: 20px 0 12px;
 }
+.modal__legend {
+  margin-bottom: 12px;
+}
 
 .modal__form {
   display: flex;
@@ -84,6 +87,7 @@
   border-bottom: 1px solid rgba(0, 0, 0, 1);
   margin-top: 8px;
   margin-bottom: 24px;
+  padding: 0;
 }
 .modal__footer {
   margin-left: 32px;
@@ -119,7 +123,7 @@
   margin-top: 24px;
 }
 .modal__label_type_radio {
-  margin: 8px 0 8px;
+  margin: 4px 0;
 }
 
 .modal__label span {
