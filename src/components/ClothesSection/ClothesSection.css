@@ -1,0 +1,27 @@
+@font-face {
+  font-family: "Cabinet Grotesk";
+  src: url("../../vendor/fonts/CabinetGrotesk-Bold.woff") format("woff");
+  font-weight: 700;
+  font-display: swap;
+  font-style: normal;
+}
+
+.clothes-section__personal {
+  display: flex;
+  flex-direction: row;
+  font-family: "Cabinet Grotesk";
+  font-weight: 700;
+}
+.clothes-section__btn {
+  border: none;
+  background-color: white;
+  font-family: "Cabinet Grotesk";
+  font-weight: 700;
+  margin-left: 20px;
+}
+
+.clothes-section__list {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 0;
+}

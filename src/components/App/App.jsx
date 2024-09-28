@@ -3,7 +3,11 @@ import { Routes, Route } from "react-router-dom";
 
 import "./App.css";
 import Profile from "../Profile/Profile";
-import { coordinates, APIkey } from "../../utils/constants";
+import {
+  coordinates,
+  APIkey,
+  defaultClothingItems,
+} from "../../utils/constants";
 import Header from "../Header/Header";
 import Main from "../Main/Main";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
@@ -12,6 +16,7 @@ import { getWeather, filterWeatherData } from "../../utils/weatherApi";
 import { CurrentTemperatureUnitContext } from "../../contexts/CurrentTemperatureUnitContext";
 import Footer from "../Footer/Footer";
 import AddItemModal from "../AddItemModal/AddItemModal";
+import { getItems, postItems, deleteItems } from "../../utils/api";
 
 function App() {
   const [weatherData, setWeatherData] = useState({
@@ -21,7 +26,10 @@ function App() {
   });
   const [activeModal, setActiveModal] = useState("");
   const [selectedCard, setSelectedCard] = useState({});
+  const [selectedButton, setSelectedButton] = useState("");
   const [currentTemperatureUnit, setCurrentTemperatureUnit] = useState("F");
+  const [clothingItems, setClothingItems] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleCardClick = (card) => {
     setActiveModal("preview");
@@ -32,12 +40,56 @@ function App() {
     setActiveModal("add-garment");
   };
 
-  const closeActiveModal = () => {
-    setActiveModal("");
+  const handleButtonClick = (evt) => {
+    setSelectedButton(evt.target.value);
   };
 
-  const onAddItem = (values) => {
-    console.log(values);
+  const handleAddItemSubmit = (newItem) => {
+    setClothingItems([newItem, ...clothingItems]);
+  };
+
+  const closeActiveModal = () => {
+    setActiveModal("");
+    console.log("closed");
+    if (activeModal === "add-garment") {
+      setSelectedButton("");
+    }
+  };
+
+  const onAddItem = (newItem, resetForm) => {
+    console.log(newItem);
+    setIsLoading(true);
+
+    postItems(newItem)
+      .then((res) => {
+        console.log(res);
+        closeActiveModal();
+
+        handleAddItemSubmit(res);
+        closeActiveModal();
+      })
+      .catch((err) => {
+        console.error(err);
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
+  };
+
+  const handleDelete = () => {
+    console.log(selectedCard._id);
+
+    deleteItems(selectedCard._id)
+      .then(() => {
+        const newItems = defaultClothingItems.filter(
+          (item) => item._id !== selectedCard._id
+        );
+        setClothingItems(newItems);
+        closeActiveModal();
+      })
+      .catch((err) => {
+        console.error(err);
+      });
   };
 
   const handleToggleSwitchChange = () => {
@@ -53,6 +105,15 @@ function App() {
       })
       .catch(console.error);
   }, []);
+
+  useEffect(() => {
+    getItems()
+      .then((data) => {
+        console.log(data);
+      })
+      .catch(console.error);
+  }, []);
+
   console.log(currentTemperatureUnit);
   return (
     <div className="page">
@@ -69,12 +130,19 @@ function App() {
                 <Main
                   weatherData={weatherData}
                   handleCardClick={handleCardClick}
+                  handleDelete={handleDelete}
                 />
               }
             />
             <Route
               path="/profile"
-              element={<Profile OnCardClick={handleCardClick} />}
+              element={
+                <Profile
+                  weatherData={weatherData}
+                  onCardClick={handleCardClick}
+                  handleDelete={handleDelete}
+                />
+              }
             />
           </Routes>
         </div>
@@ -82,7 +150,10 @@ function App() {
         {activeModal === "add-garment" && (
           <AddItemModal
             closeActiveModal={closeActiveModal}
+            buttonText={isLoading ? "Saving..." : "Add garment"}
+            selectedButton={selectedButton}
             isOpen={activeModal === "add-garment"}
+            handleButtonClick={handleButtonClick}
             onAddItem={onAddItem}
           />
         )}

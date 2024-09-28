@@ -1,0 +1,21 @@
+@font-face {
+  font-family: "Cabinet Grotesk";
+  src: url("../../vendor/fonts/CabinetGrotesk-Bold.woff") format("woff");
+  font-weight: 700;
+  font-display: swap;
+  font-style: normal;
+}
+
+.modal__delete {
+  font-family: "Cabinet Grotesk";
+  font-weight: 700;
+  font-size: 20px;
+  border: none;
+  background: transparent;
+  padding: 0;
+  color: #ff4d00;
+  cursor: pointer;
+  position: absolute;
+  top: 518px;
+  left: 365px;
+}
