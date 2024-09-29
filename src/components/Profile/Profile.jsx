@@ -14,7 +14,7 @@ function Profile({ onCardClick, clothingItems, weatherData, handleAddClick }) {
         <ClothesSection
           onCardClick={onCardClick}
           clothingItems={clothingItems}
-          handleAddclick={handleAddClick}
+          handleAddClick={handleAddClick}
           weatherData={weatherData}
         />
       </section>
