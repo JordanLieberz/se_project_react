@@ -15,7 +15,7 @@ import ItemModal from "../ItemModal/ItemModal";
 import { getWeather, filterWeatherData } from "../../utils/weatherApi";
 import { CurrentTemperatureUnitContext } from "../../contexts/CurrentTemperatureUnitContext";
 import Footer from "../Footer/Footer";
-import AddItemModal from "../AddItemModal/AddItemModal";
+import AddItemModal from "../../AddItemModal/AddItemModal";
 import { getItems, postItems, deleteItems } from "../../utils/api";
 
 function App() {
