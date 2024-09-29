@@ -18,10 +18,12 @@
   font-family: "Cabinet Grotesk";
   font-weight: 700;
   margin-left: 20px;
+  cursor: pointer;
 }
 
 .clothes-section__list {
   display: flex;
   flex-wrap: wrap;
   padding: 0;
+  gap: 21px;
 }
