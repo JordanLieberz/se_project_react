@@ -1,10 +1,10 @@
 import avatar from "../../assets/avatar.png";
 import SideBar from "../SideBar/SideBar";
-import { defaultClothingItems } from "../../utils/constants";
+//import { defaultClothingItems } from "../../utils/constants";
 import ItemCard from "../ItemCard/ItemCard";
 import "./ClothesSection.css";
 
-function ClothesSection({ onCardClick, handleAddClick }) {
+function ClothesSection({ onCardClick, handleAddClick, clothingItems }) {
   return (
     <div className="clothes-section">
       <div className="clothes-section__personal">
@@ -14,7 +14,7 @@ function ClothesSection({ onCardClick, handleAddClick }) {
         </button>
       </div>
       <ul className="clothes-section__list">
-        {defaultClothingItems.map((item) => {
+        {clothingItems.map((item) => {
           return (
             <ItemCard key={item._id} item={item} onCardClick={onCardClick} />
           );

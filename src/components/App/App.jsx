@@ -56,7 +56,7 @@ function App() {
     }
   };
 
-  const onAddItem = (newItem, resetForm) => {
+  const onAddItem = (newItem) => {
     console.log(newItem);
     setIsLoading(true);
 
@@ -81,7 +81,7 @@ function App() {
 
     deleteItems(selectedCard._id)
       .then(() => {
-        const newItems = defaultClothingItems.filter(
+        const newItems = clothingItems.filter(
           (item) => item._id !== selectedCard._id
         );
         setClothingItems(newItems);
@@ -110,6 +110,7 @@ function App() {
     getItems()
       .then((data) => {
         console.log(data);
+        setClothingItems(data);
       })
       .catch(console.error);
   }, []);
@@ -131,6 +132,7 @@ function App() {
                   weatherData={weatherData}
                   handleCardClick={handleCardClick}
                   handleDelete={handleDelete}
+                  clothingItems={clothingItems}
                 />
               }
             />
@@ -141,6 +143,7 @@ function App() {
                   weatherData={weatherData}
                   onCardClick={handleCardClick}
                   handleDelete={handleDelete}
+                  clothingItems={clothingItems}
                 />
               }
             />
@@ -162,9 +165,9 @@ function App() {
           activeModal={activeModal}
           card={selectedCard}
           onClose={closeActiveModal}
+          handleDelete={handleDelete}
         />
       </CurrentTemperatureUnitContext.Provider>
-
       <Footer />
     </div>
   );
