@@ -7,6 +7,7 @@ const AddItemModal = ({
   onAddItem,
   isOpen,
   handleButtonClick,
+  selectedButton,
 }) => {
   const [name, setName] = useState("");
   const handleNameChange = (e) => {
@@ -78,6 +79,7 @@ const AddItemModal = ({
             name="weather"
             value="hot"
             onChange={handleWeatherChange}
+            checked={selectedButton === "hot"}
           />{" "}
           <span>Hot</span>
         </label>
@@ -89,6 +91,7 @@ const AddItemModal = ({
             name="weather"
             value="warm"
             onChange={handleWeatherChange}
+            checked={selectedButton === "warm"}
           />{" "}
           <span>Warm</span>
         </label>
@@ -100,6 +103,7 @@ const AddItemModal = ({
             name="weather"
             value="cold"
             onChange={handleWeatherChange}
+            checked={selectedButton === "cold"}
           />{" "}
           <span>Cold</span>
         </label>
