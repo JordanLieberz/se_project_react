@@ -27,11 +27,12 @@ function EditProfileModal({ isOpen, onClose, onUpdateUser, isLoading }) {
       isOpen={isOpen}
       onClose={onClose}
       onSubmit={handleSubmit}
-      buttonText={isLoading ? "Saving..." : "Save"}
+      buttonText={isLoading ? "Saving..." : "Save Changes"}
     >
-      <label>
+      <label className="modal__label">
         Name:
         <input
+          className="modal__input"
           type="text"
           value={name}
           onChange={(e) => setName(e.target.value)}
@@ -39,9 +40,10 @@ function EditProfileModal({ isOpen, onClose, onUpdateUser, isLoading }) {
           minLength="2"
         />
       </label>
-      <label>
+      <label className="modal__label">
         Avatar URL:
         <input
+          className="modal__input"
           type="url"
           value={avatar}
           onChange={(e) => setAvatar(e.target.value)}

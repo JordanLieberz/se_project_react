@@ -28,7 +28,6 @@
   font-size: 20px;
   line-height: 24px;
   font-weight: 700;
-
   border: none;
   background-color: transparent;
   cursor: pointer;
@@ -64,4 +63,28 @@
   text-align: center;
   color: #333;
   user-select: none;
+}
+
+.header__avatar {
+  height: 40px;
+  width: 40px;
+  border-radius: 50%;
+}
+.header__login-button {
+  font-family: "Cabinet Grotesk";
+  font-size: 20px;
+  line-height: 24px;
+  font-weight: 700;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+}
+.header__register-button {
+  font-family: "Cabinet Grotesk";
+  font-size: 20px;
+  line-height: 24px;
+  font-weight: 700;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
 }

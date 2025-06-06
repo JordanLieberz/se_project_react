@@ -1,3 +1,4 @@
+import EditProfileModal from "../EditProfileModal/EditProfileModal";
 import "./ModalWithForm.css";
 
 function ModalWithForm({
@@ -8,6 +9,9 @@ function ModalWithForm({
   onClose,
   isOpen,
   onSubmit,
+  handleRegisterModal,
+  handleLoginModal,
+  EditProfileModal,
 }) {
   return (
     <div className={`modal ${isOpen && "modal_opened"}`}>
@@ -23,6 +27,24 @@ function ModalWithForm({
           <button type="submit" className="modal__submit">
             {buttonText}
           </button>
+          {activeModal === "Log-in" && (
+            <button
+              type="submit"
+              className="modal__signin-btn"
+              onClick={handleRegisterModal}
+            >
+              or Sign Up
+            </button>
+          )}
+          {activeModal === "Sign up" && (
+            <button
+              type="submit"
+              className="modal__signin-btn"
+              onClick={handleLoginModal}
+            >
+              or Log In
+            </button>
+          )}
         </form>
       </div>
     </div>

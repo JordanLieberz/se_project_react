@@ -1,5 +1,7 @@
+const baseUrl = "http://localhost:3001";
+
 export const register = ({ name, avatar, email, password }) => {
-  return fetch(`${BASE_URL}/signup`, {
+  return fetch(`${baseUrl}/signup`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -11,7 +13,7 @@ export const register = ({ name, avatar, email, password }) => {
 };
 
 export const login = ({ email, password }) => {
-  return fetch("https://yourapi.com/signin", {
+  return fetch(`${baseUrl}/signin`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -32,7 +34,9 @@ export function getUserData(token) {
       "Content-Type": "application/json",
       authorization: `Bearer ${token}`,
     },
-  }).then(checkResponse);
+  }).then((res) =>
+    res.ok ? res.json() : Promise.reject(`Error ${res.status}`)
+  );
 }
 
 export function updateUserData({ name, avatar }, token) {

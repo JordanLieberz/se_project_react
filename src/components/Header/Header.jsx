@@ -5,7 +5,12 @@ import { Link } from "react-router-dom";
 import React, { useContext } from "react";
 import CurrentUserContext from "../../contexts/CurrentUserContext";
 
-function Header({ handleAddClick, weatherData }) {
+function Header({
+  handleAddClick,
+  weatherData,
+  handleLoginModal,
+  handleRegisterModal,
+}) {
   const currentUser = useContext(CurrentUserContext);
 
   const currentDate = new Date().toLocaleString("default", {
@@ -51,11 +56,24 @@ function Header({ handleAddClick, weatherData }) {
       >
         + Add clothes
       </button>
-
+      <button
+        onClick={handleLoginModal}
+        type="button"
+        className="header__login-button"
+      >
+        Log in
+      </button>
+      <button
+        onClick={handleRegisterModal}
+        type="button"
+        className="header__register-button"
+      >
+        Sign up
+      </button>
       <Link to="/profile" className="header__link">
         <div className="header__user-container">
           <p className="header__username">
-            {currentUser && currentUser.name ? currentUser.name : "Guest"}
+            {currentUser && currentUser.name ? currentUser.name : ""}
           </p>
           {renderAvatar()}
         </div>

@@ -73,7 +73,8 @@ function App() {
       })
       .then((userData) => {
         setCurrentUser(userData);
-        setIsLoginModalOpen(false);
+        // setIsLoginModalOpen(false);
+        closeActiveModal();
       })
       .catch((err) => {
         console.error("Login error:", err);
@@ -112,6 +113,13 @@ function App() {
     setActiveModal("add-garment");
   };
 
+  const handleLoginModal = () => {
+    setActiveModal("Log-in");
+  };
+
+  const handleRegisterModal = () => {
+    setActiveModal("Sign up");
+  };
   const handleButtonClick = (evt) => {
     setSelectedButton(evt.target.value);
   };
@@ -213,7 +221,12 @@ function App() {
           value={{ currentTemperatureUnit, handleToggleSwitchChange }}
         >
           <div className="page__content">
-            <Header handleAddClick={handleAddClick} weatherData={weatherData} />
+            <Header
+              handleAddClick={handleAddClick}
+              weatherData={weatherData}
+              handleLoginModal={handleLoginModal}
+              handleRegisterModal={handleRegisterModal}
+            />
 
             <Routes>
               <Route
@@ -257,6 +270,31 @@ function App() {
               onAddItem={onAddItem}
             />
           )}
+          {activeModal === "Log-in" && (
+            <LoginModal
+              closeActiveModal={closeActiveModal}
+              buttonText={isLoading ? "Saving..." : "Log-in"}
+              selectedButton={selectedButton}
+              isOpen={activeModal === "Log-in"}
+              handleButtonClick={handleButtonClick}
+              onAddItem={onAddItem}
+              onLogin={handleLogin}
+              activeModal={activeModal}
+              handleRegisterModal={handleRegisterModal}
+            />
+          )}
+          {activeModal === "Sign up" && (
+            <RegisterModal
+              closeActiveModal={closeActiveModal}
+              buttonText={isLoading ? "Saving..." : "Sign up"}
+              selectedButton={selectedButton}
+              isOpen={activeModal === "Sign up"}
+              handleButtonClick={handleButtonClick}
+              onAddItem={onAddItem}
+              handleLoginModal={handleLoginModal}
+              activeModal={activeModal}
+            />
+          )}
 
           <ItemModal
             activeModal={activeModal}
@@ -272,7 +310,7 @@ function App() {
             isLoading={isLoading}
           />
 
-          <RegisterModal
+          {/* <RegisterModal
             isOpen={isRegisterModalOpen}
             activeModal="register"
             closeActiveModal={() => setIsRegisterModalOpen(false)}
@@ -286,7 +324,7 @@ function App() {
             closeActiveModal={() => setIsLoginModalOpen(false)}
             handleButtonClick={() => {}}
             onLogin={handleLogin}
-          />
+          /> */}
         </CurrentTemperatureUnitContext.Provider>
       </CurrentUserContext.Provider>
 

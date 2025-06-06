@@ -13,12 +13,17 @@
   font-weight: 700;
 }
 .clothes-section__btn {
+  color: grey;
   border: none;
   background-color: white;
   font-family: "Cabinet Grotesk";
   font-weight: 700;
   margin-left: 20px;
   cursor: pointer;
+  transition: 0.5s;
+}
+.clothes-section__btn:hover {
+  color: black;
 }
 
 .clothes-section__list {

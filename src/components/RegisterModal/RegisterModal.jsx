@@ -7,12 +7,13 @@ const RegisterModal = ({
   activeModal,
   closeActiveModal,
   handleButtonClick,
+  handleLoginModal,
 }) => {
   const [formData, setFormData] = useState({
     name: "",
-    avatar: "",
     email: "",
     password: "",
+    avatar: "",
   });
 
   const handleChange = (e) => {
@@ -39,6 +40,7 @@ const RegisterModal = ({
       onClose={closeActiveModal}
       onSubmit={handleSubmit}
       handleButtonClick={handleButtonClick}
+      handleLoginModal={handleLoginModal}
     >
       <label className="modal__label">
         Name
@@ -52,18 +54,7 @@ const RegisterModal = ({
           required
         />
       </label>
-      <label className="modal__label">
-        Avatar URL
-        <input
-          type="text"
-          className="modal__input"
-          name="avatar"
-          value={formData.avatar}
-          onChange={handleChange}
-          placeholder="Avatar link"
-          required
-        />
-      </label>
+
       <label className="modal__label">
         Email
         <input
@@ -85,6 +76,18 @@ const RegisterModal = ({
           value={formData.password}
           onChange={handleChange}
           placeholder="Password"
+          required
+        />
+      </label>
+      <label className="modal__label">
+        Avatar URL
+        <input
+          type="text"
+          className="modal__input"
+          name="avatar"
+          value={formData.avatar}
+          onChange={handleChange}
+          placeholder="Avatar link"
           required
         />
       </label>

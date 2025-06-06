@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
-import { login } from "../../utils/auth";
+// import { login } from "../../utils/auth";
 
 const LoginModal = ({
   isOpen,
@@ -8,6 +8,7 @@ const LoginModal = ({
   closeActiveModal,
   handleButtonClick,
   onLogin,
+  handleRegisterModal,
 }) => {
   const [formData, setFormData] = useState({
     email: "",
@@ -21,13 +22,8 @@ const LoginModal = ({
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    login(formData)
-      .then((res) => {
-        console.log("Logged in:", res);
-        onLogin(res.token); // Save token in App state or localStorage
-        closeActiveModal();
-      })
-      .catch(console.error);
+
+    onLogin(formData);
   };
 
   return (
@@ -39,6 +35,7 @@ const LoginModal = ({
       onClose={closeActiveModal}
       onSubmit={handleSubmit}
       handleButtonClick={handleButtonClick}
+      handleRegisterModal={handleRegisterModal}
     >
       <label className="modal__label">
         Email
