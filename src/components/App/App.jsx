@@ -23,6 +23,7 @@ import RegisterModal from "../RegisterModal/RegisterModal";
 import LoginModal from "../LoginModal/LoginModal";
 import CurrentUserContext from "../../contexts/CurrentUserContext";
 import EditProfileModal from "../EditProfileModal/EditProfileModal";
+import ProtectedRoute from "../ProtectedRoute.jsx/ProtectedRoute";
 
 function App() {
   const [weatherData, setWeatherData] = useState({
@@ -38,7 +39,7 @@ function App() {
   const [isLoading, setIsLoading] = useState(false);
   const [isRegisterModalOpen, setIsRegisterModalOpen] = useState(false);
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
-  const [currentUser, setCurrentUser] = useState({});
+  const [currentUser, setCurrentUser] = useState(null);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isEditProfileModalOpen, setIsEditProfileModalOpen] = useState(false);
 
@@ -192,7 +193,9 @@ function App() {
 
   useEffect(() => {
     getItems()
-      .then((data) => setClothingItems(data))
+      .then((data) => {
+        setClothingItems(data);
+      })
       .catch(console.error);
   }, []);
 
@@ -213,6 +216,9 @@ function App() {
     }
   }, []);
 
+  // const ProtectedRoute = ({ isLoggedIn, children }) => {
+  //   return isLoggedIn ? children : <Navigate to="/" replace />;
+  // };
   // ─── Render ────────────────────────────────────────────────────────────────
   return (
     <div className="page">
@@ -226,6 +232,7 @@ function App() {
               weatherData={weatherData}
               handleLoginModal={handleLoginModal}
               handleRegisterModal={handleRegisterModal}
+              isLoggedIn={isLoggedIn}
             />
 
             <Routes>
@@ -244,17 +251,19 @@ function App() {
               <Route
                 path="/profile"
                 element={
-                  <Profile
-                    weatherData={weatherData}
-                    onCardClick={handleCardClick}
-                    handleDelete={handleDelete}
-                    clothingItems={clothingItems}
-                    handleAddClick={handleAddClick}
-                    handleEditProfileClick={() =>
-                      setIsEditProfileModalOpen(true)
-                    }
-                    onSignOut={handleLogout}
-                  />
+                  <ProtectedRoute isLoggedIn={isLoggedIn}>
+                    <Profile
+                      weatherData={weatherData}
+                      onCardClick={handleCardClick}
+                      handleDelete={handleDelete}
+                      clothingItems={clothingItems}
+                      handleAddClick={handleAddClick}
+                      handleEditProfileClick={() =>
+                        setIsEditProfileModalOpen(true)
+                      }
+                      onSignOut={handleLogout}
+                    />
+                  </ProtectedRoute>
                 }
               />
             </Routes>
@@ -309,22 +318,6 @@ function App() {
             onUpdateUser={handleUpdateUser}
             isLoading={isLoading}
           />
-
-          {/* <RegisterModal
-            isOpen={isRegisterModalOpen}
-            activeModal="register"
-            closeActiveModal={() => setIsRegisterModalOpen(false)}
-            handleButtonClick={() => {}}
-            onRegister={handleRegister}
-          />
-
-          <LoginModal
-            isOpen={isLoginModalOpen}
-            activeModal="login"
-            closeActiveModal={() => setIsLoginModalOpen(false)}
-            handleButtonClick={() => {}}
-            onLogin={handleLogin}
-          /> */}
         </CurrentTemperatureUnitContext.Provider>
       </CurrentUserContext.Provider>
 

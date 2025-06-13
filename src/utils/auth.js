@@ -1,3 +1,4 @@
+import { checkResponse } from "./api";
 const baseUrl = "http://localhost:3001";
 
 export const register = ({ name, avatar, email, password }) => {
@@ -6,10 +7,8 @@ export const register = ({ name, avatar, email, password }) => {
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({ name, avatar, email, password }), // ✅ matches your API spec
-  }).then((res) =>
-    res.ok ? res.json() : Promise.reject(`Error: ${res.status}`)
-  );
+    body: JSON.stringify({ name, avatar, email, password }),
+  }).then(checkResponse);
 };
 
 export const login = ({ email, password }) => {
@@ -19,12 +18,7 @@ export const login = ({ email, password }) => {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({ email, password }),
-  }).then((res) => {
-    if (!res.ok) {
-      return Promise.reject(`Error: ${res.status}`);
-    }
-    return res.json();
-  });
+  }).then(checkResponse);
 };
 
 export function getUserData(token) {
@@ -32,11 +26,9 @@ export function getUserData(token) {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
-      authorization: `Bearer ${token}`,
+      Authorization: `Bearer ${token}`,
     },
-  }).then((res) =>
-    res.ok ? res.json() : Promise.reject(`Error ${res.status}`)
-  );
+  }).then(checkResponse);
 }
 
 export function updateUserData({ name, avatar }, token) {
@@ -47,7 +39,5 @@ export function updateUserData({ name, avatar }, token) {
       Authorization: `Bearer ${token}`,
     },
     body: JSON.stringify({ name, avatar }),
-  }).then((res) =>
-    res.ok ? res.json() : Promise.reject(`Error ${res.status}`)
-  );
+  }).then(checkResponse);
 }

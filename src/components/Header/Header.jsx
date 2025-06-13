@@ -10,6 +10,7 @@ function Header({
   weatherData,
   handleLoginModal,
   handleRegisterModal,
+  isLoggedIn,
 }) {
   const currentUser = useContext(CurrentUserContext);
 
@@ -49,27 +50,34 @@ function Header({
         {currentDate}, {weatherData.city}
       </p>
       <ToggleSwitch />
-      <button
-        onClick={handleAddClick}
-        type="button"
-        className="header__add-clothes-btn"
-      >
-        + Add clothes
-      </button>
-      <button
-        onClick={handleLoginModal}
-        type="button"
-        className="header__login-button"
-      >
-        Log in
-      </button>
-      <button
-        onClick={handleRegisterModal}
-        type="button"
-        className="header__register-button"
-      >
-        Sign up
-      </button>
+      {console.log("currentUser", currentUser)}
+      {currentUser && (
+        <button
+          onClick={handleAddClick}
+          type="button"
+          className="header__add-clothes-btn"
+        >
+          + Add clothes
+        </button>
+      )}
+      {!isLoggedIn && (
+        <>
+          <button
+            onClick={handleLoginModal}
+            type="button"
+            className="header__login-button"
+          >
+            Log in
+          </button>
+          <button
+            onClick={handleRegisterModal}
+            type="button"
+            className="header__register-button"
+          >
+            Sign up
+          </button>
+        </>
+      )}
       <Link to="/profile" className="header__link">
         <div className="header__user-container">
           <p className="header__username">

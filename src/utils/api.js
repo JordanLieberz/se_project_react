@@ -7,7 +7,6 @@ function checkResponse(res) {
   return Promise.reject(`Error ${res.status}`);
 }
 
-// GET /items does NOT need token per your requirement
 function getItems() {
   return fetch(`${baseUrl}/items`, {
     headers: {
@@ -16,13 +15,12 @@ function getItems() {
   }).then(checkResponse);
 }
 
-// POST /items requires token in Authorization header
 function postItems({ name, imageUrl, weather }, token) {
   return fetch(`${baseUrl}/items`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      Authorization: `Bearer ${token}`, // Add token here
+      Authorization: `Bearer ${token}`,
     },
     body: JSON.stringify({
       name,
@@ -37,7 +35,7 @@ function deleteItems(cardID, token) {
     method: "DELETE",
     headers: {
       "Content-Type": "application/json",
-      Authorization: `Bearer ${token}`, // Add token here
+      Authorization: `Bearer ${token}`,
     },
   }).then(checkResponse);
 }
@@ -49,7 +47,7 @@ const addCardLike = (id, token) => {
       Authorization: `Bearer ${token}`,
       "Content-Type": "application/json",
     },
-  }).then(handleResponse);
+  }).then(checkResponse);
 };
 
 const removeCardLike = (id, token) => {
@@ -59,7 +57,14 @@ const removeCardLike = (id, token) => {
       Authorization: `Bearer ${token}`,
       "Content-Type": "application/json",
     },
-  }).then(handleResponse);
+  }).then(checkResponse);
 };
 
-export { getItems, postItems, deleteItems, addCardLike, removeCardLike };
+export {
+  getItems,
+  postItems,
+  deleteItems,
+  addCardLike,
+  removeCardLike,
+  checkResponse,
+};

@@ -8,6 +8,7 @@ const RegisterModal = ({
   closeActiveModal,
   handleButtonClick,
   handleLoginModal,
+  handleRegister,
 }) => {
   const [formData, setFormData] = useState({
     name: "",
@@ -41,6 +42,7 @@ const RegisterModal = ({
       onSubmit={handleSubmit}
       handleButtonClick={handleButtonClick}
       handleLoginModal={handleLoginModal}
+      handleRegister={handleRegister}
     >
       <label className="modal__label">
         Name

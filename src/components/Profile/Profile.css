@@ -31,3 +31,6 @@
   background-color: transparent;
   cursor: pointer;
 }
+.profile__sidebar {
+  min-width: 229px;
+}
