@@ -1,5 +1,8 @@
+const baseUrl =
+  process.env.NODE_ENV === "production"
+    ? "https://api.wtwr99.justlearning.net/"
+    : "http://localhost:3001";
 import { checkResponse } from "./api";
-const baseUrl = "http://localhost:3001";
 
 export const register = ({ name, avatar, email, password }) => {
   return fetch(`${baseUrl}/signup`, {
